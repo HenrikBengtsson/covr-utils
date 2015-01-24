@@ -136,3 +136,10 @@ covr_package <- function(...) {
     covr::coveralls(...)
   }
 }
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Main
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+## Load/install 'covr'
+use_covr()

@@ -6,8 +6,7 @@
 #
 # Henrik Bengtsson
 #################################################################
-## Load/install 'covr'
-use_covr()
+source("covr-utils.R")
 
 # Exclusion rules
 excl <- exclusions(
