@@ -112,10 +112,12 @@ all_files <- function(...) {
 use_covr <- function() {
   ## Install 'covr'?
   if (!requireNamespace("covr", quietly=TRUE)) {
+    print(getwd())
+    print(ls(all.names=TRUE))
     if (file_test("-f", "pkg-build.sh")) {
-      system2("pkg-build.sh", "install_github HenrikBengtsson/covr")
+      system2("./pkg-build.sh", "install_github HenrikBengtsson/covr")
     } else if (file_test("-f", "travis-tool.sh")) {
-      system2("travis-tool.sh", "install_github HenrikBengtsson/covr")
+      system2("./travis-tool.sh", "install_github HenrikBengtsson/covr")
     } else {
       source("http://callr.org/install#HenrikBengtsson/covr")
     }
