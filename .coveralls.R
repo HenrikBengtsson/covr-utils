@@ -1,6 +1,7 @@
 #################################################################
 # Test coverage
 #
+# * covr-utils: https://github.com/HenrikBengtsson/covr-utils
 # * covr: https://github.com/jimhester/covr
 # * Coveralls: https://coveralls.io/
 #
