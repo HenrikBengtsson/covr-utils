@@ -14,7 +14,7 @@
 ##  skip=all : Skip all the lines in file
 ##  skip=2   : Skip the following two lines
 covr_lines <- function(file) {
-  lines <- readLines(file)
+  lines <- read_lines(file)
   nlines <- length(lines)
   pattern <- ".*#[ ]*covr:[ ]*([^#]*).*"
   idxs <- grep(pattern, lines)
@@ -48,18 +48,24 @@ covr_lines <- function(file) {
 
 ## Don't report on any line
 all_lines <- function(file) {
-  lines <- readLines(file)
+  lines <- read_lines(file)
   seq_along(lines)
 }
 
 ## Don't report on stop() lines
 stop_lines <- function(file) {
-  grep("(^|[ \t])(abort|stop|throw)[(]", readLines(file))
+  grep("(^|[ \t])(abort|stop|throw)[(]", read_lines(file))
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Local functions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+read_lines <- function(file, ..., encoding="ascii") {
+  con <- file(file, encoding=encoding)
+  on.exit(close(con))
+  readLines(con=con, ...)
+}
+
 exclusions <- function(...) {
   structure(c(...), class="exclusions")
 }
@@ -79,7 +85,7 @@ c.exclusions <- function(excl=list(), new) {
 
 read.exclusion <- function(excl) {
   mapply(names(excl), excl, FUN=function(file, idxs) {
-    readLines(file)[idxs]
+    read_lines(file)[idxs]
   })
 }
 
