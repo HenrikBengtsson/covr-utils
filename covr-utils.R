@@ -41,7 +41,7 @@ covr_lines <- function(file) {
     excl
   })
   excludes <- unlist(excludes)
-  excludes <- unique(sort(excludes))
+  if (length(excludes) > 0) excludes <- unique(sort(excludes))
   if (is.null(excludes)) excludes <- integer(0)
   excludes
 }
