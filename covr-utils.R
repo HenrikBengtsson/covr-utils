@@ -132,6 +132,9 @@ use_covr <- function() {
 }
 
 covr_package <- function(...) {
+  oopts <- options(encoding="ascii", warn=1L)
+  on.exit(options(oopts))
+
   use_covr()
 
   if (interactive()) {
