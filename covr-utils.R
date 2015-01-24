@@ -60,7 +60,7 @@ stop_lines <- function(file) {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Local functions
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-read_lines <- function(file, ..., encoding="ascii") {
+read_lines <- function(file, ..., encoding="latin1") {
   con <- file(file, encoding=encoding)
   on.exit(close(con))
   readLines(con=con, ...)
@@ -131,15 +131,17 @@ use_covr <- function() {
   loadNamespace("covr")
 }
 
-covr_package <- function(...) {
-  oopts <- options(encoding="ascii", warn=1L)
+covr_package <- function(..., encoding="latin1", warn=1L) {
+  oopts <- options(encoding=encoding, warn=warn)
   on.exit(options(oopts))
 
   use_covr()
 
   if (interactive()) {
     coverage <- covr::package_coverage(...)
+    cat("\n\n")
     print(coverage)
+    cat("\n\n")
     invisible(coverage)
   } else {
     covr::coveralls(...)
