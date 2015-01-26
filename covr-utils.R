@@ -54,7 +54,7 @@ all_lines <- function(file) {
 
 ## Don't report on stop() lines
 stop_lines <- function(file) {
-  grep("(^|[ \t])(abort|stop|throw)[(]", read_lines(file))
+  grep("(^|[ \t])(abort|stop|throw|.Defunct|.Deprecated)[(]", read_lines(file))
 }
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
