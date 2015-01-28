@@ -115,7 +115,7 @@ all_files <- function(...) {
   c(r_files(), src_files())
 }
 
-use_covr <- function(quiet=FALSE) {
+use_covr <- function(quiet=TRUE) {
   ## Install 'covr'?
   if (!requireNamespace("covr", quietly=TRUE)) {
     if (file_test("-f", "pkg-build.sh")) {
@@ -158,4 +158,4 @@ covr_package <- function(..., encoding="latin1", warn=1L) {
 # Main
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## Load/install 'covr'
-use_covr()
+use_covr(quiet=FALSE)
