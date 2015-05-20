@@ -137,21 +137,25 @@ use_covr <- function(quiet=TRUE) {
   invisible(pkg)
 }
 
-covr_package <- function(..., encoding="latin1", warn=1L) {
+covr_package <- function(..., target=c("codecov", "coveralls")[1], encoding="latin1", warn=1L) {
   oopts <- options(encoding=encoding, warn=warn)
   on.exit(options(oopts))
 
   use_covr()
+  coverage <- covr::package_coverage(...)
+  cat("\n\n")
+  print(coverage)
+  cat("\n\n")
 
-  if (interactive()) {
-    coverage <- covr::package_coverage(...)
-    cat("\n\n")
-    print(coverage)
-    cat("\n\n")
-    invisible(coverage)
-  } else {
-    covr::coveralls(...)
+  if (!interactive()) {
+    if (target == "codecov") {
+      covr::codecov(coverage=coverage, quiet=TRUE, ...)
+    } else if (target == "coveralls") {
+      covr::coveralls(coverage=coverage, quiet=TRUE, ...)
+    }
   }
+
+  invisible(coverage)
 }
 
 
