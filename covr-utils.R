@@ -137,7 +137,7 @@ use_covr <- function(quiet=TRUE) {
   invisible(pkg)
 }
 
-covr_package <- function(..., quiet=FALSE, target=c("codecov", "coveralls")[1], encoding="latin1", warn=1L) {
+covr_package <- function(..., quiet=FALSE, target=c("codecov", "coveralls")[2], encoding="latin1", warn=1L) {
   oopts <- options(encoding=encoding, warn=warn)
   on.exit(options(oopts))
 
