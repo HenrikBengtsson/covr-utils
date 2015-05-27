@@ -150,11 +150,15 @@ covr_package <- function(..., quiet=FALSE, target=c("codecov", "coveralls")[2], 
   }
 
   if (!interactive()) {
-    if (target == "codecov") {
-      covr::codecov(coverage=coverage, quiet=TRUE, ...)
-    } else if (target == "coveralls") {
-      covr::coveralls(coverage=coverage, quiet=TRUE, ...)
-    }
+    tryCatch({
+      if (target == "codecov") {
+        covr::codecov(coverage=coverage, quiet=TRUE, ...)
+      } else if (target == "coveralls") {
+        covr::coveralls(coverage=coverage, quiet=TRUE, ...)
+      }
+    }, error = function(ex) {
+      warning("A non-critical error was detected: ", ex$msg)
+    })
   }
 
   invisible(coverage)
