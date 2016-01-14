@@ -142,7 +142,7 @@ covr_package <- function(..., quiet=FALSE, target=c("codecov", "coveralls")[2], 
   on.exit(options(oopts))
 
   use_covr()
-  coverage <- covr::package_coverage(...)
+  coverage <- covr::package_coverage(..., quiet=quiet)
   if (!quiet) {
     cat("\n\n")
     print(coverage)
